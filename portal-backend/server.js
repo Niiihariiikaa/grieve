@@ -68,30 +68,7 @@ app.post("/api/firebase-login", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 // ✅ Upload Message Route (Protected)
-=======
-const authenticateToken = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "Missing or invalid Authorization header" });
-  }
-
-  const idToken = authHeader.split("Bearer ")[1];
-
-  try {
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
-    req.user = decodedToken; // Attach user info to request
-    next(); // Proceed to the next middleware/route
-  } catch (error) {
-    console.error("Error verifying token:", error);
-    res.status(401).json({ error: "Invalid token" });
-  }
-};
-
-
->>>>>>> f2e6c39370c2b45ce9b68ef1b9a9cc7f1811eed9
 app.post("/upload-message", authenticateToken, async (req, res) => {
   try {
     const { content, mood } = req.body;
